@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="car"></p>
+    <p>shift</p>
+    <p id="carshift1"></p>
+    <p id="carshift2"></p>
+    <p>UnShift</p>
+    <p id="carunshift1"></p>
+    <p id="carunshift2"></p>
+    <p>Delete</p>
+    <p id="cardelete1"></p>
+    <p id="cardelete2"></p>
+    <p>Pop</p>
+    <p id="carpop1"></p>
+    <p id="carpop2"></p>
+    <p>splice</p>
+    <p id="carsplice1"></p>
+    <p id="carsplice2"></p>
+
+</body>
+<script>
+    const cars = ["Volvo", "BMW", "Audi","Ford"];
+    const cars1 = ["Volvo", "BMW", "Audi","Ford"];
+    let carsSize = cars.length;
+    
+
+//kasutada shift, unshift, delete, pop, splice
+
+    //votab ara esimese elemendi
+    document.getElementById("carshift1").innerHTML = cars;
+    cars.shift();
+    document.getElementById("carshift2").innerHTML = cars;
+
+
+    //lisab uue elemendi nimekirja algusesse
+    document.getElementById("carunshift1").innerHTML = cars;
+    cars.unshift("Flying car");
+    document.getElementById("carunshift2").innerHTML = cars;
+
+
+    //delete tekitab tuhjad kohad masiivi ja siis on vastuseks undefined
+    document.getElementById("cardelete1").innerHTML = 
+    "First car is" + cars[0];
+    delete cars[0];
+    document.getElementById("cardelete2").innerHTML = 
+    "First car is" + cars[0];
+    
+
+
+    //votab ara viimase elemendi
+    document.getElementById("carpop1").innerHTML = cars1;
+    cars1.pop();
+    document.getElementById("carpop2").innerHTML = cars1;
+
+  
+
+    //lisab vahele elemendid
+    document.getElementById("carsplice1").innerHTML = cars;
+    // esimene nr on lisatava elementide stardikoht, teine nr kustutab olemasolevad elemendid
+    cars.splice(0, 4, "Kia", "Skoda");
+    document.getElementById("carsplice2").innerHTML = cars;
+</script>
+</html>
