@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary calculator</title>
+</head>
+<body>
+    <!-- //Palga kalkulaator
+//1. Sina sisestad brutotasu ja valem arvutab välja netotasu.
+//2. Kokku peab olema kolm erinevat meetodit. 
+// Enne kui meetod algab, siis peab olema kontroll, 
+// et millist meetodi hakatakse kasutama ja sisestatud palgasumma 
+// peab minema edasi järgmisse meetodi.
+//3. Netotasu peab arvutama selliselt välja, et sina ei peaks 
+// tuludeklaratsiooni ajal juurde maksma ega saa pärast riigilt raha 
+// juurde kuna oled rohkem maksnud.
+//4. Kood peab olema inglisekeelne.
+//Palgakalkulaator:
+//https://www.kalkulaator.ee/et/palgakalkulaator
+//Palga arvutamise valem:
+//https://www.emta.ee/et/maksuvaba-tulu -->
+    <button onclick="palk()">vajuta</button>
+    <p id="neto"> Sinu netopalk on:</p>
+</body>
+<script>
+        function palk() {
+            let bruto = parseFloat(prompt("utle brutopalk"));
+
+            if(isNaN(bruto) || bruto <=0) {
+                alert("vale");
+                return;
+            }
+
+            let maksuvabatulu = prompt("maksuvabatulu jah v ei").toLowerCase();
+
+            let neto
+
+            if (maksuvabatulu === "jah") {
+                if (bruto <= 1200) {
+                    neto = palkmaxmaksuvabalt(bruto);
+                } else if (bruto > 1200 && bruto <= 2100) {
+                    neto = palkmuutuvmaksuvabalt(bruto);
+                } else {
+                    neto = palkilmamaksuvabalt(bruto);
+                }
+            } else if (maksuvabatulu === "ei") {
+                neto = palkilmamaksuvabalt(bruto);
+            } else {
+                alert("jah voi ei");
+                return;
+            }
+
+            document.getElementById("neto").innerText = neto;
+        
+
+
+        function palkilmamaksuvabalt(bruto) {
+            let pension = bruto * 0.02;
+            let unemploymentInsurance = bruto * 0.016;
+            let incometax = bruto * 0.2121
+            return bruto - pension - unemploymentInsurance - incometax
+        }
+
+        function palkmaxmaksuvabalt(bruto) {
+            let maksuvaba = 654;
+            let pension = bruto * 0.02;
+            let unemploymentInsurance = bruto * 0.016;
+
+            let taxableIncome = bruto - pension - unemploymentInsurance;
+            let incometax = (taxableIncome - maksuvaba) * 0.2;
+            return taxableIncome - incometax;
+        }
+        function palkmuutuvmaksuvabalt(bruto) {
+            let maksuvaba = 654;
+            let pension = bruto * 0.02;
+            let unemploymentInsurance = bruto * 0.016;
+
+            let taxableIncome = bruto - pension - unemploymentInsurance;
+            let taxFreeAmount = maksuvaba - ((taxableIncome - 1200) / 900) * maksuvaba;
+
+            let incometax = (taxableIncome - taxFreeAmount) * 0.2;
+            return taxableIncome - incometax;
+        }
+    }
+</script>
+</html>

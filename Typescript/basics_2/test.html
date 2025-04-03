@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Calculator</title>
+</head>
+<body>
+    <h2>Salary Calculator</h2>
+    <button onclick="calculateSalary()">Calculate Net Salary</button>
+    <p>Net Salary: <span id="neto">-</span> €</p>
+
+    <script>
+        function calculateSalary() {
+            let bruto = parseFloat(prompt("Please enter your gross salary (brutopalk):"));
+            
+            if (isNaN(bruto) || bruto <= 0) {
+                alert("Invalid input. Please enter a valid salary.");
+                return;
+            }
+
+            let taxFreeIncome = prompt("Do you have tax-free income? (yes/no)").toLowerCase();
+
+            let netSalary;
+            
+            if (taxFreeIncome === "yes") {
+                netSalary = calculateWithTaxFree(bruto);
+            } else if (taxFreeIncome === "no") {
+                netSalary = calculateWithoutTaxFree(bruto);
+            } else {
+                alert("Invalid input. Please enter 'yes' or 'no'.");
+                return;
+            }
+
+            document.getElementById("neto").innerText = netSalary.toFixed(2);
+        }
+
+        // Method 1: Calculate net salary without tax-free income
+        function calculateWithoutTaxFree(bruto) {
+            let pension = bruto * 0.02;
+            let unemploymentInsurance = bruto * 0.016;
+            let incomeTax = (bruto - pension - unemploymentInsurance) * 0.2;
+            return bruto - pension - unemploymentInsurance - incomeTax;
+        }
+
+        // Method 2: Calculate net salary with full tax-free income (up to 654€ in 2024)
+        function calculateWithTaxFree(bruto) {
+            let maxTaxFree = 654;
+            let pension = bruto * 0.02;
+            let unemploymentInsurance = bruto * 0.016;
+            
+            let taxableIncome = bruto - pension - unemploymentInsurance;
+            let taxFreeAmount = taxableIncome <= 1200 ? maxTaxFree : Math.max(0, maxTaxFree - ((taxableIncome - 1200) / 900) * maxTaxFree);
+            
+            let incomeTax = (taxableIncome - taxFreeAmount) * 0.2;
+            return taxableIncome - incomeTax;
+        }
+
+        // Method 3: Calculate net salary with partial tax-free amount (progressive tax system)
+        function calculateProgressiveTax(bruto) {
+            let pension = bruto * 0.02;
+            let unemploymentInsurance = bruto * 0.016;
+
+            let taxableIncome = bruto - pension - unemploymentInsurance;
+            let taxFreeAmount = taxableIncome < 1200 ? 654 : taxableIncome > 2100 ? 0 : 654 - ((taxableIncome - 1200) / 900) * 654;
+
+            let incomeTax = (taxableIncome - taxFreeAmount) * 0.2;
+            return taxableIncome - incomeTax;
+        }
+    </script>
+</body>
+</html>
