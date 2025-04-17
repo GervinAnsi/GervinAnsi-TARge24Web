@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="getMonth"></p>
+
+    <p id="getDay"></p>
+
+
+</body>
+<script>
+    let month;
+    switch (new Date().getMonth()) {
+        case 0:
+            month = "jaanuar"
+            break;
+        case 1:
+            month = "veebruar"
+            break;
+        case 2:
+            month = "marts"
+            break;
+        case 3:
+            month = "aprill"
+            break;
+        case 4:
+            month = "mai"
+            break;
+        case 5:
+            month = "juuni"
+            break;
+    }
+
+    document.getElementById("getMonth").innerHTML = "tana on " + month;
+
+
+    // kui on neljapaev ja reede siis utleb: kohe on nadalavahetus
+    // kui on laup ja puhap siis utleb: on nv
+    let day;
+    switch (new Date().getDay()) {
+        case 0:
+            day = "puhapaev, on nv"
+            break;
+        case 1:
+            day = "esmaspaev"
+            break;
+        case 2:
+            day = "teisipaev"
+            break;
+        case 3:
+            day = "kolmapaev"
+            break;
+        case 4:
+            day = "neljapaev, kohe on nadalavahetus"
+            break;
+        case 5:
+            day = "reede, kohe on nadalavahetus"
+            break;
+        case 6:
+            day = "laupaev, on nv"
+            break;
+    }
+    document.getElementById("getDay").innerHTML = "tana on " + day;
+
+
+    // let paev;
+    // switch (new Date().getDay()) {
+    //     case 3:
+    //     case 4: 
+    //         paev = "kohe on nv";
+    //         break;
+    //     case 5:
+    //     case 6: 
+    //         paev = "nuud on nv";
+    //         break;
+
+    //     default:
+    //         paev = "ootan nv"
+    // }
+    // document.getElementById("getDay").innerHTML = "tana on " + paev;
+</script>
+</html>
