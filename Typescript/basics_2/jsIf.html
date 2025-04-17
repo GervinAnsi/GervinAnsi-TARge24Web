@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="teretulemast"></p>
+
+    <p id="tere"></p>
+
+    <p id="teretamine"></p>
+</body>
+<script>
+    // if (new Date().getHours() < 18) {
+    //     document.getElementById("teretulemast").innerHTML = "Tere tulemast!"
+    // }
+
+    //tehke sama asi nagu eelmine kord, aga p alla ei kirjuta midagi
+    // tuleb kasutada if ja else
+
+    if (new Date().getHours() < 12) {
+        document.getElementById("tere").innerHTML = "Tere hommikust!"
+        } else if (new Date().getHours() < 18) {
+            document.getElementById("tere").innerHTML = "Tere paevast!"
+        } else {
+            document.getElementById("tere").innerHTML = "Tere ohtust!"
+        }
+    
+
+    const time = new Date().getHours();
+    let text;
+    if (time < 9) {
+        text = "tere hommikust";
+    } else if (time < 20) {
+        text = "tere paevast!";
+    } else {
+        text = "tere ood";
+    }
+    document.getElementById("teretamine").innerHTML = text;
+
+
+    //random
+
+    if(Math.random() < 0.5) {
+        text = "<a href ='https://www.tthk.ee/'> TTHK </a>";
+    } else {
+        text = "<a href ='https://www.tthk.ee/'> Youtube </a>";
+    }
+    document.getElementById("randomlink").innerHTML = text;
+
+</script>
+</html>
